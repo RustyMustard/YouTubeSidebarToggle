@@ -6,6 +6,32 @@ function updateIcon(state) {
   });
 }
 
+function updateIconState(tabId, changeInfo, tab) {
+  if (!tab || !tab.url) return;
+
+  const isYouTube = tab.url.includes("://www.youtube.com");
+  if (isYouTube) {
+    browser.browserAction.enable(tab.id);
+  } else {
+    browser.browserAction.disable(tab.id);
+  }
+}
+
+// Run when tab is updated
+browser.tabs.onUpdated.addListener(updateIconState);
+
+// Run when tab is activated
+browser.tabs.onActivated.addListener(async (activeInfo) => {
+  const tab = await browser.tabs.get(activeInfo.tabId);
+  updateIconState(tab.id, null, tab);
+});
+
+// Optional: run on startup for current tab
+browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
+  if (tabs[0]) updateIconState(tabs[0].id, null, tabs[0]);
+});
+
+
 browser.browserAction.onClicked.addListener(async (tab) => {
   const { sidebarHidden = false } = await browser.storage.local.get("sidebarHidden");
   const newState = !sidebarHidden;
