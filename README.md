@@ -1,6 +1,6 @@
 # YouTube Sidebar Toggle
 
-A simple Firefox extension to toggle YouTube's left sidebar visibility.
+What it says on the tin. A simple Firefox extension to toggle YouTube's annoying left sidebar popout behavior.
 
 ## Installation
 
