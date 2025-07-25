@@ -1,0 +1,8 @@
+/* Only apply styles when class is added to <html> */
+.yt-sidebar-blocked ytd-app[guide-persistent-and-visible] ytd-mini-guide-renderer:hover {
+  display: none !important;
+}
+
+.yt-sidebar-blocked ytd-mini-guide-renderer {
+  pointer-events: none !important;
+}
